@@ -5,6 +5,7 @@ pkgdesc="Virtual Terminal Emulator widget for use with GTK3"
 arch=('x86_64')
 url=("http://ftp.gnome.org/pub/GNOME/sources/vte/0.39/")
 license=('LGPL')
+makedepends=('vala' 'glibc' 'gtk3' 'intltool>=0.35' 'python2')
 provides=('vte' 'vte3')
 source=("$pkgname::http://ftp.gnome.org/pub/GNOME/sources/vte/0.39/vte-0.39.90.tar.xz")
 
