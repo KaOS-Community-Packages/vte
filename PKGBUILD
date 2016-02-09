@@ -3,26 +3,20 @@ pkgver=3.9.90
 pkgrel=1
 pkgdesc="Virtual Terminal Emulator widget for use with GTK3"
 arch=('x86_64')
-url=("http://ftp.gnome.org/pub/GNOME/sources/vte/0.39/")
+url=("http://ftp.gnome.org/pub/GNOME/sources/$pkgname/0.39/")
 license=('LGPL')
-makedepends=('vala' 'glibc' 'gtk3' 'intltool>=0.35' 'python2')
-provides=('vte' 'vte3')
-source=("$pkgname::http://ftp.gnome.org/pub/GNOME/sources/vte/0.39/vte-0.39.90.tar.xz")
-
-depends=('vala>=0.26.2-1')
-
+depends=('vala')
+makedepends=('glibc' 'gtk3' 'intltool' 'python2')
+source=("$pkgname::http://ftp.gnome.org/pub/GNOME/sources/$pkgname/0.39/$pkgname-0.39.90.tar.xz")
 sha256sums=("9d127e8dc9ca8267fe65f280bf3afb17d68ef154163f84b3bb2fc79e73abbc97")
 
 build() {
-	
-	cd $srcdir/vte-0.39.90
+	cd $srcdir/$pkgname-0.39.90
 	./configure --prefix=/usr
 	make 
 }
 
 package() {
-	pwd
-	cd $srcdir/vte-0.39.90
-	pwd
+	cd $srcdir/$pkgname-0.39.90
 	make DESTDIR="$pkgdir/" install
 }
