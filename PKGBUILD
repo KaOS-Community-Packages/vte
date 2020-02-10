@@ -1,22 +1,22 @@
-pkgname='vte'
-pkgver=3.9.90
+pkgname=vte
+pkgver=0.59.0
 pkgrel=1
 pkgdesc="Virtual Terminal Emulator widget for use with GTK3"
 arch=('x86_64')
-url="http://ftp.gnome.org/pub/GNOME/sources/$pkgname/0.39/"
+url="https://wiki.gnome.org/Apps/Terminal/VTE"
 license=('LGPL')
-depends=('vala')
-makedepends=('glibc' 'gtk3' 'intltool' 'python2')
-source=("$pkgname::http://ftp.gnome.org/pub/GNOME/sources/$pkgname/0.39/$pkgname-0.39.90.tar.xz")
-sha256sums=("9d127e8dc9ca8267fe65f280bf3afb17d68ef154163f84b3bb2fc79e73abbc97")
+depends=('glibc' 'gtk3')
+makedepends=('meson' 'ninja' 'vala')
+source=("http://ftp.gnome.org/pub/GNOME/sources/$pkgname/$pkgver/$pkgname-$pkgver.tar.xz")
+sha256sums=("bbd54c2ef133d0883acf2a4afbf1085087b576f4046a8728209111a604de6927")
 
 build() {
-	cd $srcdir/$pkgname-0.39.90
-	./configure --prefix=/usr
-	make 
+	cd $srcdir/$pkgname-$pkgver
+	meson _build --prefix=/usr
+	ninja -C _build
 }
 
 package() {
-	cd $srcdir/$pkgname-0.39.90
-	make DESTDIR="$pkgdir/" install
+	cd $srcdir/$pkgname-$pkgver
+	DESTDIR=$pkgdir/ ninja -C _build install
 }
